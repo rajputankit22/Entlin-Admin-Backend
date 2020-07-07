@@ -1,4 +1,4 @@
-# Admin-Dashboard-Backend
+# Entlin-Admin-Backend
 SME Admin-Dashboard Backend with Nodejs, Expressjs and MongoDB.
 
 ## Requirements
@@ -15,8 +15,8 @@ SME Admin-Dashboard Backend with Nodejs, Expressjs and MongoDB.
 
 ## Start Process
 ### Start Process for Development
-- Step 1:- Clone project from via git clone https://github.com/z2p-today/Admin-Dashboard-Backend.git
-- Step 2:- Enter in Admin-Dashboard-Backend
+- Step 1:- Clone project from via git clone https://github.com/z2p-today/Entlin-Admin-Backend.git
+- Step 2:- Enter in Entlin-Admin-Backend
 - Step 3:- Install dependencies via npm install
 - Step 4:- 
   - npm start
@@ -24,13 +24,13 @@ SME Admin-Dashboard Backend with Nodejs, Expressjs and MongoDB.
   - nodemon      
 
 ### Start Process for Production
-- Step 1:- Clone project from via git clone https://github.com/z2p-today/Admin-Dashboard-Backend.git
+- Step 1:- Clone project from via git clone https://github.com/z2p-today/Entlin-Admin-Backend.git
 - Step 3:- Install dependencies via npm install
-- Step 2:- Enter in Admin-Dashboard-Backend
+- Step 2:- Enter in Entlin-Admin-Backend
 - Step 4:- npm start bin/www
 
 ### Start Process for Production with PM2
-- Step 1:- Clone project from via git clone https://github.com/z2p-today/Admin-Dashboard-Backend.git
+- Step 1:- Clone project from via git clone https://github.com/z2p-today/Entlin-Admin-Backend.git
 - Step 3:- Install dependencies via npm install
-- Step 2:- Enter in Admin-Dashboard-Backend
-- Step 4:- pm2 start 'bin/www' --name=Admin-Dashboard-Backend --time
+- Step 2:- Enter in Entlin-Admin-Backend
+- Step 4:- pm2 start 'bin/www' --name=Entlin-Admin-Backend --time
