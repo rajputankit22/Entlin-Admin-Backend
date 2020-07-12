@@ -15,6 +15,7 @@ dotenv.config();
 const indexRouter = require("./routes/index");
 const loanRouter = require("./routes/loans");
 const employeeRouter = require("./routes/employees");
+const mentorRouter = require("./routes/mentors");
 const borrowerRouter = require("./routes/borrowers");
 const lenderRouter = require("./routes/lenders");
 const adminRouter = require("./routes/admins");
@@ -24,7 +25,7 @@ const feesRouter = require("./routes/fees");
 
 const app = express();
 
-mongoose.connect("mongodb://localhost:27017/smedashboard", {
+mongoose.connect("mongodb://localhost:27017/entlin", {
   useNewUrlParser: true,
   useCreateIndex: true
 });
@@ -67,6 +68,8 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter);
 app.use("/loans", loanRouter);
 app.use("/admins", adminRouter);
+app.use("/employees", employeeRouter);
+app.use("/mentors", mentorRouter);
 app.use("/employees", employeeRouter);
 app.use("/borrowers", borrowerRouter);
 app.use("/lenders", lenderRouter);

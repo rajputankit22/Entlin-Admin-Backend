@@ -20,6 +20,24 @@ module.exports.addEmployeeValidator = [
     check("employeeId").isLength({ min: 3, max: 3 }).withMessage("Employee Id is invalid!"),
 ]
 
+/* Add mentor related validation */
+module.exports.addMentorValidator = [
+    check("mentorName").not().isEmpty().withMessage("Name is required").isLength({ min: 1, max: 50 }).withMessage("Mentor's Name shoudn't greater than 50 characters!"),
+    check("email").isEmail().withMessage("Email is invalid!"),
+    check("password").isLength({ min: 6 }).withMessage("Password is invalid!"),
+    check("mobile").isMobilePhone().isLength({ min: 10, max: 10 }).withMessage("Mobile is invalid!"),
+    check('dob').isBefore().withMessage("DOB cannot be empty"),
+    check("totalExperience").isNumeric().withMessage("Total Experience is invalid!"),
+    check("higerEducation").isIn(["MCA", "MBA", "BSC"]).withMessage("Higer Education is invalid!"),
+    check("skills").isArray().withMessage("Skills is invalid!"),
+    check("currentlyWorking").isLength({ min: 1, max: 50 }).withMessage("Company Name shoudn't greater than 50 characters!"),
+    check("aboutMe").isLength({ min: 1, max: 500 }).withMessage("AboutMe shoudn't greater than 50 characters!"),
+    check("address.address").not().isEmpty().withMessage("Mentor's address can't be empty!").isLength({ max: 200 }).withMessage("Mentor's address can't be more than 200 characters!"),
+    check("address.city").not().isEmpty().withMessage("Mentor's address City can't be empty!").isLength({ max: 50 }).withMessage("Mentor's address City can't be more than 50 characters!"),
+    check("address.state").not().isEmpty().withMessage("Mentor's address state can't be empty!").isLength({ max: 50 }).withMessage("Mentor's address state can't be more than 50 characters!"),
+    check("address.pin").isNumeric().isLength({ min: 6, max: 6 }).withMessage("Mentor's address pincode is invalid!"),
+]
+
 /* Update password related validation */
 module.exports.updatePasswordValidator = [
     check("password").not().isEmpty().withMessage("Current Password is required"),
@@ -28,11 +46,19 @@ module.exports.updatePasswordValidator = [
 
 /* Update profile related validation */
 module.exports.updateProfileValidator = [
-    check("firstName").isAlpha().withMessage("First Name is invalid"),
-    check("lastName").isAlpha().withMessage("Last Name is required"),
-    check("email").isEmail().withMessage("Email is required"),
-    check("mobile").notEmpty().withMessage("Mobile number is required"),
-    check("employeeId").isLength({ min: 3, max: 3 }).withMessage("Employee Id is invalid!"),
+    check("mentorName").not().isEmpty().withMessage("Name is required").isLength({ min: 1, max: 50 }).withMessage("Mentor's Name shoudn't greater than 50 characters!"),
+    check("email").isEmail().withMessage("Email is invalid!"),
+    check("mobile").isMobilePhone().isLength({ min: 10, max: 10 }).withMessage("Mobile is invalid!"),
+    check('dob').isBefore().withMessage("DOB cannot be empty"),
+    check("totalExperience").isNumeric().withMessage("Total Experience is invalid!"),
+    check("higerEducation").isIn(["MCA", "MBA", "BSC"]).withMessage("Higer Education is invalid!"),
+    check("skills").isArray().withMessage("Skills is invalid!"),
+    check("currentlyWorking").isLength({ min: 1, max: 50 }).withMessage("Company Name shoudn't greater than 50 characters!"),
+    check("aboutMe").isLength({ min: 1, max: 500 }).withMessage("AboutMe shoudn't greater than 50 characters!"),
+    check("address.address").not().isEmpty().withMessage("Mentor's address can't be empty!").isLength({ max: 200 }).withMessage("Mentor's address can't be more than 200 characters!"),
+    check("address.city").not().isEmpty().withMessage("Mentor's address City can't be empty!").isLength({ max: 50 }).withMessage("Mentor's address City can't be more than 50 characters!"),
+    check("address.state").not().isEmpty().withMessage("Mentor's address state can't be empty!").isLength({ max: 50 }).withMessage("Mentor's address state can't be more than 50 characters!"),
+    check("address.pin").isNumeric().isLength({ min: 6, max: 6 }).withMessage("Mentor's address pincode is invalid!"),
 ]
 
 // /* Update borrower profile related validation */

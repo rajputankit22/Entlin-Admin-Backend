@@ -1,5 +1,6 @@
 exports.loans = require("./Loans/loans");
 exports.employees = require("./Employees/employees");
+exports.mentors = require("./Mentors/mentors");
 exports.admins = require("./Admins/admins");
 exports.lenders = require("./Lenders/lenders");
 exports.borrowers = require("./Borrowers/borrowers");
