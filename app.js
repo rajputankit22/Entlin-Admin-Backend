@@ -16,6 +16,9 @@ const indexRouter = require("./routes/index");
 const loanRouter = require("./routes/loans");
 const employeeRouter = require("./routes/employees");
 const mentorRouter = require("./routes/mentors");
+const answerRouter = require("./routes/answers");
+const questionRouter = require("./routes/questions");
+const studentRouter = require("./routes/students");
 const borrowerRouter = require("./routes/borrowers");
 const lenderRouter = require("./routes/lenders");
 const adminRouter = require("./routes/admins");
@@ -76,6 +79,9 @@ app.use("/lenders", lenderRouter);
 app.use("/histories", historyRouter);
 app.use("/homes", homeRouter);
 app.use("/fees", feesRouter);
+app.use("/questions", questionRouter);
+app.use("/answers", answerRouter);
+app.use("/students", studentRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

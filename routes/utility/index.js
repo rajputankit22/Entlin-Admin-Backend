@@ -1,6 +1,9 @@
 exports.loans = require("./Loans/loans");
 exports.employees = require("./Employees/employees");
 exports.mentors = require("./Mentors/mentors");
+exports.students = require("./Students/students");
+exports.questions = require("./Questions/questions");
+exports.answers = require("./Answers/answers");
 exports.admins = require("./Admins/admins");
 exports.lenders = require("./Lenders/lenders");
 exports.borrowers = require("./Borrowers/borrowers");
