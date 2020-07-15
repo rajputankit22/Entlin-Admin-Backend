@@ -17,8 +17,8 @@ const videoSchema = new Schema({
     type: String,
     required: [true, "Description is required"],
     validate(value) {
-      if (value.length < 10 || value.length > 100) {
-        throw new Error("Description at least 10 and at most 100 characters!");
+      if (value.length < 10 || value.length > 500) {
+        throw new Error("Description at least 10 and at most 500 characters!");
       }
     }
   },
@@ -37,8 +37,8 @@ const videoSchema = new Schema({
     type: String,
     required: [true, "Creator detailsis required"],
     validate(value) {
-      if (value.length < 2 || value.length > 100) {
-        throw new Error("Creator Name at least 2 and at most 100 characters!");
+      if (value.length < 2 || value.length > 500) {
+        throw new Error("Creator Name at least 2 and at most 500 characters!");
       }
     }
   },
@@ -48,7 +48,7 @@ const videoSchema = new Schema({
     default: false,
     required: [true, 'Uploaded is required!']
   },
-  public: {
+  publish: {
     trim: true,
     type: Boolean,
     default: false,
@@ -57,6 +57,7 @@ const videoSchema = new Schema({
   videoFileName: {
     trim: true,
     type: String,
+    unique: [true, "Video FileName already registered"],
     required: [true, "Video Name is required"],
     validate(value) {
       if (value.length < 10 || value.length > 5000) {

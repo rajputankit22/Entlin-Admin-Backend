@@ -24,7 +24,7 @@ const lenderRouter = require("./routes/lenders");
 const adminRouter = require("./routes/admins");
 const homeRouter = require("./routes/homes");
 const historyRouter = require("./routes/histories");
-const feesRouter = require("./routes/fees");
+const videoRouter = require("./routes/videos");
 
 const app = express();
 
@@ -78,7 +78,7 @@ app.use("/borrowers", borrowerRouter);
 app.use("/lenders", lenderRouter);
 app.use("/histories", historyRouter);
 app.use("/homes", homeRouter);
-app.use("/fees", feesRouter);
+app.use("/videos", videoRouter);
 app.use("/questions", questionRouter);
 app.use("/answers", answerRouter);
 app.use("/students", studentRouter);

@@ -20,6 +20,15 @@ module.exports.addEmployeeValidator = [
     check("employeeId").isLength({ min: 3, max: 3 }).withMessage("Employee Id is invalid!"),
 ]
 
+/* Post Video Validator */
+module.exports.postVideoValidator = [
+    check("title").not().isEmpty().withMessage("Title is required!").isLength({ min: 10, max: 100 }).withMessage("Title should be at least 10 and at most 100 characters!"),
+    check("description").not().isEmpty().withMessage("Description is required!").isLength({ min: 10, max: 500 }).withMessage("Description should be at least 10 and at most 100 characters!"),
+    check("createdBy").not().isEmpty().withMessage("Name is required!").isLength({ min: 2, max: 100 }).withMessage("Creator Name should be at least 2 and at most 100 characters!"),
+    check("createrDetails").not().isEmpty().withMessage("Creater Details is required!").isLength({ min: 10, max: 500 }).withMessage("Creater Details should be at least 10 and at most 500 characters!"),
+    check("prefix").not().isEmpty().withMessage("prefix is required!").isLength({ min: 1, max: 100 }).withMessage("prefix should be at least 1 and at most 100 characters!"),
+]
+
 /* Add mentor related validation */
 module.exports.addMentorValidator = [
     check("mentorName").not().isEmpty().withMessage("Name is required").isLength({ min: 1, max: 50 }).withMessage("Mentor's Name shoudn't greater than 50 characters!"),
