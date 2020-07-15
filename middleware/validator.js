@@ -61,6 +61,18 @@ module.exports.updateProfileValidator = [
     check("address.pin").isNumeric().isLength({ min: 6, max: 6 }).withMessage("Mentor's address pincode is invalid!"),
 ]
 
+/* Update profile related validation */
+module.exports.updateStudentProfileValidator = [
+    check("studentId").not().isEmpty().withMessage("student Id is required").isMongoId().withMessage("Student's Id os invalid!"),
+    check("studentName").not().isEmpty().withMessage("Name is required").isLength({ min: 1, max: 50 }).withMessage("Student's Name shoudn't greater than 50 characters!"),
+    check("email").isEmail().withMessage("Email is invalid!"),
+    check("mobile").isMobilePhone().isLength({ min: 10, max: 10 }).withMessage("Mobile is invalid!"),
+    check("address.address").optional().not().isEmpty().withMessage("Student's address can't be empty!").isLength({ max: 200 }).withMessage("Student's address can't be more than 200 characters!"),
+    check("address.city").optional().not().isEmpty().withMessage("Student's address City can't be empty!").isLength({ max: 50 }).withMessage("Student's address City can't be more than 50 characters!"),
+    check("address.state").optional().not().isEmpty().withMessage("Student's address state can't be empty!").isLength({ max: 50 }).withMessage("Student's address state can't be more than 50 characters!"),
+    check("address.pin").optional().isNumeric().isLength({ min: 6, max: 6 }).withMessage("Student's address pincode is invalid!"),
+]
+
 // /* Update borrower profile related validation */
 // module.exports.updateBorrowerProfileValidator = [
 //     check("applicantFirstName").isAlpha().withMessage("Applicant First Name is invalid!"),

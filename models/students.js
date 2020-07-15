@@ -57,7 +57,7 @@ const studentSchema = new Schema(
     studentName: {
       trim: true,
       type: String,
-      required: [true, "Applicant First Name is required!"],
+      required: [true, "Student Name is required!"],
       validate(value) {
         if (value.length < 2 || value.length > 100) {
           throw new Error("Applicant First Name is invalid!");
