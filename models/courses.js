@@ -88,7 +88,7 @@ const courseSchema = new Schema({
     default: false,
     required: [true, 'Uploaded is required!']
   },
-  public: {
+  publish: {
     trim: true,
     type: Boolean,
     default: false,
@@ -107,10 +107,14 @@ const courseSchema = new Schema({
 );
 
 // Validation for tags size
-courseSchema.path('videosList').validate(function (value) {
-  if (value.length == courseSchema.path('numberOfVideos')) {
-    throw new Error("Number of tags should be less than or equal to 5!");
-  }
+courseSchema.path('videosList').validate(function (value1) {
+  courseSchema.path('numberOfVideos').validate(function (value2) {
+    console.log(value1.length)
+    console.log(value2)
+    if (value1.length !== value2) {
+      throw new Error("Number of videos should be less than or equal to 5!");
+    }
+  })
 });
 
 const Courses = mongoose.model("Courses", courseSchema);

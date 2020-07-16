@@ -13,7 +13,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const indexRouter = require("./routes/index");
-const loanRouter = require("./routes/loans");
+const courseRouter = require("./routes/courses");
 const employeeRouter = require("./routes/employees");
 const mentorRouter = require("./routes/mentors");
 const answerRouter = require("./routes/answers");
@@ -69,7 +69,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
-app.use("/loans", loanRouter);
+app.use("/courses", courseRouter);
 app.use("/admins", adminRouter);
 app.use("/employees", employeeRouter);
 app.use("/mentors", mentorRouter);
