@@ -107,14 +107,10 @@ const courseSchema = new Schema({
 );
 
 // Validation for tags size
-courseSchema.path('videosList').validate(function (value1) {
-  courseSchema.path('numberOfVideos').validate(function (value2) {
-    console.log(value1.length)
-    console.log(value2)
-    if (value1.length !== value2) {
-      throw new Error("Number of videos should be less than or equal to 5!");
-    }
-  })
+courseSchema.path('videosList').validate(function (value) {
+  if (value.length < 1) {
+    throw new Error("videosList should at least 1!");
+  }
 });
 
 const Courses = mongoose.model("Courses", courseSchema);
