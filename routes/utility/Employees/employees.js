@@ -57,10 +57,16 @@ module.exports.updatePassword = async (req, res, next) => {
     }
   } catch (error) {
     console.log(error);
-    res.status(500).send({
-      success: false,
-      error: "Internal Server Error"
-    });
+    console.log(err);
+    if (err) {
+      if (err.name == 'ValidationError') {
+        for (field in err.errors) {
+          res.status(422).send({ success: false, error: err.errors[field].message });
+        }
+      } else if (err.name == 'MongoError' && err.code == 11000) {
+        res.status(422).send({ success: false, error: "Enployee already exist!" });
+      } else { res.status(500).json({ success: false, error: err }); }
+    }
   }
 };
 

@@ -40,6 +40,19 @@ module.exports.postCourseValidator = [
     check("prefix").not().isEmpty().withMessage("prefix is required!").isLength({ min: 1, max: 100 }).withMessage("prefix should be at least 1 and at most 100 characters!"),
 ]
 
+/* Post Event Validator */
+module.exports.postEventValidator = [
+    check("type").not().isEmpty().withMessage("Type is required!").isIn(['Webinar', 'Live Talk']).withMessage("Type is invalid!"),
+    check("title").not().isEmpty().withMessage("Title is required!").isLength({ min: 10, max: 100 }).withMessage("Title should be at least 10 and at most 100 characters!"),
+    check("description").not().isEmpty().withMessage("Description is required!").isLength({ min: 10, max: 500 }).withMessage("Description should be at least 10 and at most 100 characters!"),
+    check("createdBy").not().isEmpty().withMessage("Name is required!").isLength({ min: 2, max: 100 }).withMessage("Creator Name should be at least 2 and at most 100 characters!"),
+    check("createrDetails").not().isEmpty().withMessage("Creater Details is required!").isLength({ min: 10, max: 500 }).withMessage("Creater Details should be at least 10 and at most 500 characters!"),
+    check("startTime").not().isEmpty().withMessage("Start Time is required!").isAfter().withMessage("Start Time should be greater than today!"),
+    check("duration").not().isEmpty().withMessage("Duration is required!").isNumeric().withMessage("Duration is invalid!"),
+    check("points").not().isEmpty().withMessage("Points is required!").isNumeric().withMessage("Points is invalid!"),
+    check("price").not().isEmpty().withMessage("Price is required!").isNumeric().withMessage("Price is invalid!"),
+]
+
 /* Add mentor related validation */
 module.exports.addMentorValidator = [
     check("mentorName").not().isEmpty().withMessage("Name is required").isLength({ min: 1, max: 50 }).withMessage("Mentor's Name shoudn't greater than 50 characters!"),

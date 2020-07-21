@@ -26,6 +26,7 @@ const homeRouter = require("./routes/homes");
 const historyRouter = require("./routes/histories");
 const videoRouter = require("./routes/videos");
 const courseRatingRouter = require("./routes/courseRatings");
+const eventRouter = require("./routes/events");
 
 
 
@@ -85,6 +86,7 @@ app.use("/videos", videoRouter);
 app.use("/questions", questionRouter);
 app.use("/answers", answerRouter);
 app.use("/students", studentRouter);
+app.use("/events", eventRouter);
 app.use("/coursesRatings", courseRatingRouter);
 
 // catch 404 and forward to error handler

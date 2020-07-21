@@ -10,4 +10,5 @@ exports.borrowers = require("./Borrowers/borrowers");
 exports.histories = require("./Histories/histories");
 exports.videos = require("./Videos/videos");
 exports.homes = require("./Homes/homes");
+exports.events = require("./Events/events");
 exports.courseRatings = require("./CourseRatings/courseRatings");
