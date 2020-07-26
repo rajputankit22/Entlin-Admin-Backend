@@ -27,8 +27,8 @@ const historyRouter = require("./routes/histories");
 const videoRouter = require("./routes/videos");
 const courseRatingRouter = require("./routes/courseRatings");
 const eventRouter = require("./routes/events");
-
-
+const pointRouter = require("./routes/points");
+const registrationRouter = require("./routes/registrations");
 
 const app = express();
 
@@ -88,6 +88,9 @@ app.use("/answers", answerRouter);
 app.use("/students", studentRouter);
 app.use("/events", eventRouter);
 app.use("/coursesRatings", courseRatingRouter);
+app.use("/registrations", registrationRouter);
+app.use("/points", pointRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -272,3 +272,8 @@ module.exports.changeCommentValidator = [
     check("loanId").isAlphanumeric().withMessage("Loan Id should be alphaNumeric!"),
     check("comment").not().isEmpty().withMessage("Comment can't be empty!").isLength({ min: 1, max: 300 }).withMessage("Comment should be less than 3000 characters!"),
 ]
+
+/* Registration related validation */
+module.exports.registrationValidator = [
+    check("eventId").not().isEmpty().withMessage("Event Id shouldn't Empty!").isMongoId().withMessage("Event Id is inavlid!"),
+]

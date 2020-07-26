@@ -12,3 +12,5 @@ exports.videos = require("./Videos/videos");
 exports.homes = require("./Homes/homes");
 exports.events = require("./Events/events");
 exports.courseRatings = require("./CourseRatings/courseRatings");
+exports.registrations = require("./Registrations/registrations");
+exports.points = require("./Points/points");
