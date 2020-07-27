@@ -2,9 +2,6 @@ var express = require("express");
 var router = express.Router();
 const validator = require("../middleware/validator");
 const Employees = require("../models/employees");
-const Loans = require("../models/loans");
-const config = require("../config")
-const jwt = require("jsonwebtoken");
 const axios = require('axios');
 const {
 	check,

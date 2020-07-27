@@ -273,7 +273,42 @@ module.exports.changeCommentValidator = [
     check("comment").not().isEmpty().withMessage("Comment can't be empty!").isLength({ min: 1, max: 300 }).withMessage("Comment should be less than 3000 characters!"),
 ]
 
-/* Registration related validation */
-module.exports.registrationValidator = [
+/* Event Id validation */
+module.exports.eventIdValidator = [
     check("eventId").not().isEmpty().withMessage("Event Id shouldn't Empty!").isMongoId().withMessage("Event Id is inavlid!"),
+]
+
+/* Question Id validation */
+module.exports.questionIdValidator = [
+    check("questionId").not().isEmpty().withMessage("Question Id shouldn't Empty!").isMongoId().withMessage("Question Id is inavlid!"),
+]
+
+/* Student Id validation */
+module.exports.studentIdValidator = [
+    check("studentId").not().isEmpty().withMessage("Student Id shouldn't Empty!").isMongoId().withMessage("Student Id is inavlid!"),
+]
+
+/* Video Id validation */
+module.exports.videoIdValidator = [
+    check("videoId").not().isEmpty().withMessage("Video Id shouldn't Empty!").isMongoId().withMessage("Video Id is inavlid!"),
+]
+
+/* Mentor Id validation */
+module.exports.mentorIdValidator = [
+    check("mentorId").not().isEmpty().withMessage("Mentor Id shouldn't Empty!").isMongoId().withMessage("Mentor Id is inavlid!"),
+]
+
+/* Course Id validation */
+module.exports.courseIdValidator = [
+    check("courseId").not().isEmpty().withMessage("Course Id shouldn't Empty!").isMongoId().withMessage("Course Id is inavlid!"),
+]
+
+/* Rating Id validation */
+module.exports.ratingIdValidator = [
+    check("ratingId").not().isEmpty().withMessage("Rating Id shouldn't Empty!").isMongoId().withMessage("Rating Id is inavlid!"),
+]
+
+/* Employee Id validation */
+module.exports.employeeIdValidator = [
+    check("employeeId").not().isEmpty().withMessage("Employee Id shouldn't Empty!").isMongoId().withMessage("Employee Id is inavlid!"),
 ]

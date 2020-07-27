@@ -92,7 +92,7 @@ module.exports.fetchEmployees = async (req, res, next) => {
 /* Fetch employee */
 module.exports.fetchEmployee = async (req, res, next) => {
   try {
-    const employee = await Employees.findById({ _id: req.params.id }, { password: 0, createdAt: 0, updatedAt: 0 });
+    const employee = await Employees.findById({ _id: req.params.employeeId }, { password: 0, createdAt: 0, updatedAt: 0 });
     res.status(200).json({
       success: true,
       employees: employee.getPublicProfileEmployee()
@@ -109,13 +109,13 @@ module.exports.fetchEmployee = async (req, res, next) => {
 /* Remove any employee */
 module.exports.removeEmployee = async (req, res, next) => {
   try {
-    if (req.employee._id == req.params.id) {
+    if (req.employee._id == req.params.employeeId) {
       res.status(501).json({
         success: false,
         error: "You can't delete yourself!",
       });
     } else {
-      const deletedEmployee = await Employees.deleteOne({ _id: req.params.id });
+      const deletedEmployee = await Employees.deleteOne({ _id: req.params.employeeId });
       res.status(200).json({
         success: true,
         message: "Employee Removed Successfully!",

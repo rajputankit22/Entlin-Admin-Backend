@@ -1,5 +1,5 @@
 const Histories = require("../../../models/histories");
-const Loans = require("../../../models/loans");
+const Students = require("../../../models/students");
 const { check, validationResult } = require("express-validator");
 
 
@@ -71,10 +71,11 @@ module.exports.fetchHomeDetails = async (req, res, next) => {
         // }
     ]
     try {
-        const loansCount = await Loans.aggregate(aggregateLoans)
+        // const loansCount = await Students.aggregate(aggregateLoans)
+        const studentsCount = await Students.count()
         res.status(200).send({
             success: true,
-            loansCount: loansCount,
+            studentsCount: studentsCount,
         });
     } catch (error) {
         console.log(error);

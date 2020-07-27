@@ -43,10 +43,17 @@ module.exports.fetchStudent = async (req, res, next) => {
   try {
     const student = await Students.findById(req.params.studentId, { password: 0, createdAt: 0, updatedAt: 0 });
     console.log(student)
-    res.status(200).json({
-      success: true,
-      student: student.getPublicProfileStudent()
-    });
+    if (student) {
+      res.status(200).json({
+        success: true,
+        student: student.getPublicProfileStudent()
+      });
+    } else {
+      res.status(501).send({
+        success: false,
+        error: "Student is not present!"
+      });
+    }
   } catch (err) {
     console.log(err);
     res.status(501).send({

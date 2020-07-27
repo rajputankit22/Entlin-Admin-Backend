@@ -6,9 +6,9 @@ const validator = require("../middleware/validator");
 
 /* Mentor Related Routes */
 router.post("/addMentor", validator.addMentorValidator, auth.loginAuth, auth.adminAccessAuth, utility.mentors.addMentor); //  Api to add new mentor.
-router.get("/fetchMentor/:mentorId", auth.loginAuth, auth.adminAccessAuth, utility.mentors.fetchMentor); // Api fetch one mentor.
-router.get("/removeMentor/:mentorId", auth.loginAuth, auth.adminAccessAuth, utility.mentors.removeMentor); // Api to remove mentor.
-router.post("/updateProfile/:mentorId", validator.updateProfileValidator, auth.loginAuth, auth.adminAccessAuth, utility.mentors.updateProfile); // Api to update mentor profile.
+router.get("/fetchMentor/:mentorId", validator.mentorIdValidator, auth.loginAuth, auth.adminAccessAuth, utility.mentors.fetchMentor); // Api fetch one mentor.
+router.get("/removeMentor/:mentorId", validator.mentorIdValidator, auth.loginAuth, auth.adminAccessAuth, utility.mentors.removeMentor); // Api to remove mentor.
+router.post("/updateProfile/:mentorId", validator.mentorIdValidator, validator.updateProfileValidator, auth.loginAuth, auth.adminAccessAuth, utility.mentors.updateProfile); // Api to update mentor profile.
 router.get("/fetchAllMentors", auth.loginAuth, auth.adminAccessAuth, utility.mentors.fetchAllMentors); // Api to fetch all mentors.
 
 module.exports = router;

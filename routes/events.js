@@ -6,10 +6,10 @@ const validator = require("../middleware/validator");
 
 /* Events Related Routes */
 router.post("/postEvent", validator.postEventValidator, auth.loginAuth, utility.events.postEvent); // Api to post new event.
-router.post("/updateEvent/:eventId", validator.postEventValidator, auth.loginAuth, utility.events.updateEvent); // Api to post new event.
-router.get("/fetchEvent/:eventId", auth.loginAuth, utility.events.fetchEvent); // Api fetch one event.
+router.post("/updateEvent/:eventId", validator.eventIdValidator, validator.postEventValidator, auth.loginAuth, utility.events.updateEvent); // Api to post new event.
+router.get("/fetchEvent/:eventId", validator.eventIdValidator, auth.loginAuth, utility.events.fetchEvent); // Api fetch one event.
 router.get("/fetchAllEvents", auth.loginAuth, utility.events.fetchAllEvents); // Api fetch all events.
-router.get("/deleteEvent/:eventId", auth.loginAuth, utility.events.deleteEvent); // Api to delete event.
+router.get("/deleteEvent/:eventId", validator.eventIdValidator, auth.loginAuth, utility.events.deleteEvent); // Api to delete event.
 
 
 module.exports = router;
