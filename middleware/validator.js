@@ -78,7 +78,7 @@ module.exports.updatePasswordValidator = [
 ]
 
 /* Update profile related validation */
-module.exports.updateProfileValidator = [
+module.exports.updateProfileValidator1 = [
     check("mentorName").not().isEmpty().withMessage("Name is required").isLength({ min: 1, max: 50 }).withMessage("Mentor's Name shoudn't greater than 50 characters!"),
     check("email").isEmail().withMessage("Email is invalid!"),
     check("mobile").isMobilePhone().isLength({ min: 10, max: 10 }).withMessage("Mobile is invalid!"),
@@ -92,6 +92,15 @@ module.exports.updateProfileValidator = [
     check("address.city").not().isEmpty().withMessage("Mentor's address City can't be empty!").isLength({ max: 50 }).withMessage("Mentor's address City can't be more than 50 characters!"),
     check("address.state").not().isEmpty().withMessage("Mentor's address state can't be empty!").isLength({ max: 50 }).withMessage("Mentor's address state can't be more than 50 characters!"),
     check("address.pin").isNumeric().isLength({ min: 6, max: 6 }).withMessage("Mentor's address pincode is invalid!"),
+]
+
+/* Update employee profile related validation */
+module.exports.updateProfileValidator = [
+    check("firstName").isAlpha().withMessage("First Name is invalid"),
+    check("lastName").isAlpha().withMessage("Last Name is required"),
+    check("email").isEmail().withMessage("Email is required"),
+    check("mobile").notEmpty().withMessage("Mobile number is required"),
+    check("employeeId").isLength({ min: 3, max: 3 }).withMessage("Employee Id is invalid!"),
 ]
 
 /* Update profile related validation */
@@ -238,9 +247,6 @@ module.exports.updateOwnProfileValidator = [
     check("lastName").isAlpha().withMessage("Last Name is required"),
     check("email").isEmail().withMessage("Email is required"),
     check("mobile").notEmpty().withMessage("Mobile number is required"),
-    check("employeeId").not().exists().withMessage("You can't update employee Id!"),
-    check("departments").not().exists().withMessage("You can't update department!"),
-    check("ACL").not().exists().withMessage("You can't update ACL!")
 ]
 
 /* Update intrest validation */
