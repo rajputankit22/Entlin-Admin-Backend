@@ -103,7 +103,6 @@ const mentorSchema = new Schema(
         profilePicName: {
             trim: true,
             type: String,
-            unique: [true, "Profile pic name already taken"],
         },
         dob: {
             trim: true,
