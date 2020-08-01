@@ -134,8 +134,8 @@ const mentorSchema = new Schema(
             trim: true,
             type: String,
             validate(value) {
-                if (value.length < 50 || value.length > 500) {
-                    throw new Error("AboutMe should be atleast 50 and at most 500 characters!");
+                if (value.length < 50 || value.length > 2000) {
+                    throw new Error("AboutMe should be atleast 50 and at most 2000 characters!");
                 }
             }
         },

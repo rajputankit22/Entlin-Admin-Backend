@@ -77,8 +77,8 @@ module.exports.updatePasswordValidator = [
     check("newPassword").not().isEmpty().withMessage("New Password is required")
 ]
 
-/* Update profile related validation */
-module.exports.updateProfileValidator1 = [
+/* Update mentor's profile validation */
+module.exports.updateMentorProfileValidator = [
     check("mentorName").not().isEmpty().withMessage("Name is required").isLength({ min: 1, max: 50 }).withMessage("Mentor's Name shoudn't greater than 50 characters!"),
     check("email").isEmail().withMessage("Email is invalid!"),
     check("mobile").isMobilePhone().isLength({ min: 10, max: 10 }).withMessage("Mobile is invalid!"),
