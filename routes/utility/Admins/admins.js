@@ -56,7 +56,7 @@ module.exports.updateProfile = async (req, res, next) => {
     const saveEmployee = await findEmployee.save();
     res.status(200).json({
       success: true,
-      admin: saveEmployee.getPublicProfileEmployee()
+      employee: saveEmployee.getPublicProfileEmployee()
     });
   } catch (err) {
     console.log(err);

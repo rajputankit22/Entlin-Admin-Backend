@@ -29,8 +29,8 @@ module.exports.addMentor = async (req, res, next) => {
     });
     const savedMentor = await mentor.save();
     // const token = await savedMentor.generateAuthToken();
-    const newRefreshToken = await savedMentor.generateRefreshToken();
-    const updatedMentor = await Mentors.findByIdAndUpdate(savedMentor._id, { refreshToken: newRefreshToken }, { new: true })
+    // const newRefreshToken = await savedMentor.generateRefreshToken();
+    // const updatedMentor = await Mentors.findByIdAndUpdate(savedMentor._id, { refreshToken: newRefreshToken }, { new: true })
     res.status(200).send({
       success: true,
       message: "Mentor added Successfully!",
@@ -73,7 +73,7 @@ module.exports.updateProfile = async (req, res, next) => {
     res.status(200).send({
       success: true,
       message: "Mentor Updated Successfully!",
-      admin: savedMentor.getPublicProfileMentor(),
+      mentor: savedMentor.getPublicProfileMentor(),
     });
   } catch (err) {
     console.log(err);
