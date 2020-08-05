@@ -6,6 +6,7 @@ const validator = require("../middleware/validator");
 
 /* Videos Related Routes */
 router.post("/postVideo", validator.postVideoValidator, auth.loginAuth, utility.videos.postVideo); // Api post one video.
+router.post("/updateVideo/:videoId", validator.videoIdValidator, validator.updateVideoValidator, auth.loginAuth, utility.videos.updateVideo); // Api to update video.
 router.get("/uploadVideo/:videoId", validator.videoIdValidator, auth.loginAuth, utility.videos.uploadVideo); // Api upload video.
 router.get("/unUploadVideo/:videoId", validator.videoIdValidator, auth.loginAuth, utility.videos.unUploadVideo); // Api unUpload video.
 router.get("/publishVideo/:videoId", validator.videoIdValidator, auth.loginAuth, utility.videos.publishVideo); // Api fetch publish video.

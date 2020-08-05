@@ -35,6 +35,33 @@ module.exports.postVideo = async (req, res, next) => {
     }
 };
 
+/* Update video */
+module.exports.updateVideo = async (req, res, next) => {
+    try {
+        const video = await Videos.findById(req.params.videoId);
+        video.title = req.body.title;
+        video.description = req.body.description;
+        video.createdBy = req.body.createdBy;
+        video.createrDetails = req.body.createrDetails;
+        const savedVideos = await video.save()
+        res.status(200).json({
+            success: true,
+            video: savedVideos
+        });
+    } catch (err) {
+        console.log(err);
+        if (err) {
+            if (err.name == 'ValidationError') {
+                for (field in err.errors) {
+                    res.status(422).send({ success: false, error: err.errors[field].message });
+                }
+            } else if (err.name == 'MongoError' && err.code == 11000) {
+                res.status(422).send({ success: false, error: "Video already exist!" });
+            } else { res.status(500).json({ success: false, error: err }); }
+        }
+    }
+};
+
 /* Upload video */
 module.exports.uploadVideo = async (req, res, next) => {
     try {
