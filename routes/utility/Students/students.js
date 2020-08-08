@@ -14,15 +14,18 @@ module.exports.updateProfile = async (req, res, next) => {
     });
   }
   try {
-    const findStudent = await Students.findStudentById(req.body.studentId);
+    const findStudent = await Students.findStudentById(req.params.studentId);
     findStudent.studentName = req.body.studentName;
     findStudent.email = req.body.email;
     findStudent.mobile = req.body.mobile;
-    findStudent.address = req.body.address;
+    findStudent.skills = req.body.skills;
+    findStudent.higerEducation = req.body.higerEducation;
+    findStudent.aboutMe = req.body.aboutMe;
+    findStudent.dob = req.body.dob;
     const saveStudent = await findStudent.save();
     res.status(200).json({
       success: true,
-      admin: saveStudent.getPublicProfileStudent()
+      student: saveStudent.getPublicProfileStudent()
     });
   } catch (err) {
     console.log(err);
@@ -85,7 +88,7 @@ module.exports.removeStudent = async (req, res, next) => {
 /* Fetch all students' list */
 module.exports.fetchAllStudents = async (req, res, next) => {
   try {
-    const students = await Students.find({}, { password: 0, mobile: 0, createdAt: 0, updatedAt: 0, refreshToken: 0 });
+    const students = await Students.find({}, { password: 0, createdAt: 0, updatedAt: 0, refreshToken: 0 });
     res.status(200).json({
       success: true,
       students: students

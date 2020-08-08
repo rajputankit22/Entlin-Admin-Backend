@@ -39,10 +39,10 @@ module.exports.updateVideoValidator = [
 
 /* Post Video Validator */
 module.exports.postCourseValidator = [
-    check("title").not().isEmpty().withMessage("Title is required!").isLength({ min: 10, max: 100 }).withMessage("Title should be at least 10 and at most 100 characters!"),
-    check("description").not().isEmpty().withMessage("Description is required!").isLength({ min: 10, max: 500 }).withMessage("Description should be at least 10 and at most 100 characters!"),
+    check("title").not().isEmpty().withMessage("Title is required!").isLength({ min: 2, max: 100 }).withMessage("Title should be at least 2 and at most 100 characters!"),
+    check("description").not().isEmpty().withMessage("Description is required!").isLength({ min: 2, max: 2000 }).withMessage("Description should be at least 2 and at most 100 characters!"),
     check("createdBy").not().isEmpty().withMessage("Name is required!").isLength({ min: 2, max: 100 }).withMessage("Creator Name should be at least 2 and at most 100 characters!"),
-    check("createrDetails").not().isEmpty().withMessage("Creater Details is required!").isLength({ min: 10, max: 500 }).withMessage("Creater Details should be at least 10 and at most 500 characters!"),
+    check("createrDetails").not().isEmpty().withMessage("Creater Details is required!").isLength({ min: 2, max: 2000 }).withMessage("Creater Details should be at least 2 and at most 2000 characters!"),
     check("numberOfVideos").not().isEmpty().withMessage("numberOfVideos is required!").isNumeric().withMessage("Number Of Videos is invalid!"),
     check("videosList").not().isEmpty().withMessage("video List is required!").isArray().withMessage("Video List is invalid!"),
     check("prefix").not().isEmpty().withMessage("prefix is required!").isLength({ min: 1, max: 100 }).withMessage("prefix should be at least 1 and at most 100 characters!"),
@@ -95,7 +95,7 @@ module.exports.updateMentorProfileValidator = [
     check("higerEducation").isIn(["MCA", "MBA", "BSC"]).withMessage("Higer Education is invalid!"),
     check("skills").isArray().withMessage("Skills is invalid!"),
     check("currentlyWorking").isLength({ min: 1, max: 50 }).withMessage("Company Name shoudn't greater than 50 characters!"),
-    check("aboutMe").isLength({ min: 1, max: 500 }).withMessage("AboutMe shoudn't greater than 50 characters!"),
+    check("aboutMe").isLength({ min: 10, max: 500 }).withMessage("AboutMe should be at least 10 and at most 2000 characters!"),
     check("address.address").not().isEmpty().withMessage("Mentor's address can't be empty!").isLength({ max: 200 }).withMessage("Mentor's address can't be more than 200 characters!"),
     check("address.city").not().isEmpty().withMessage("Mentor's address City can't be empty!").isLength({ max: 50 }).withMessage("Mentor's address City can't be more than 50 characters!"),
     check("address.state").not().isEmpty().withMessage("Mentor's address state can't be empty!").isLength({ max: 50 }).withMessage("Mentor's address state can't be more than 50 characters!"),
@@ -113,14 +113,18 @@ module.exports.updateProfileValidator = [
 
 /* Update profile related validation */
 module.exports.updateStudentProfileValidator = [
-    check("studentId").not().isEmpty().withMessage("student Id is required").isMongoId().withMessage("Student's Id os invalid!"),
     check("studentName").not().isEmpty().withMessage("Name is required").isLength({ min: 1, max: 50 }).withMessage("Student's Name shoudn't greater than 50 characters!"),
     check("email").isEmail().withMessage("Email is invalid!"),
     check("mobile").isMobilePhone().isLength({ min: 10, max: 10 }).withMessage("Mobile is invalid!"),
-    check("address.address").optional().not().isEmpty().withMessage("Student's address can't be empty!").isLength({ max: 200 }).withMessage("Student's address can't be more than 200 characters!"),
-    check("address.city").optional().not().isEmpty().withMessage("Student's address City can't be empty!").isLength({ max: 50 }).withMessage("Student's address City can't be more than 50 characters!"),
-    check("address.state").optional().not().isEmpty().withMessage("Student's address state can't be empty!").isLength({ max: 50 }).withMessage("Student's address state can't be more than 50 characters!"),
-    check("address.pin").optional().isNumeric().isLength({ min: 6, max: 6 }).withMessage("Student's address pincode is invalid!"),
+    check('dob').isBefore().withMessage("DOB cannot be empty"),
+    check("higerEducation").isIn(["MCA", "MBA", "BSC"]).withMessage("Higer Education is invalid!"),
+    check("skills").isArray().withMessage("Skills is invalid!"),
+    check("aboutMe").isLength({ min: 10, max: 2000 }).withMessage("AboutMe should be at least 10 and at most 2000 characters!"),
+
+    // check("address.address").optional().not().isEmpty().withMessage("Student's address can't be empty!").isLength({ max: 200 }).withMessage("Student's address can't be more than 200 characters!"),
+    // check("address.city").optional().not().isEmpty().withMessage("Student's address City can't be empty!").isLength({ max: 50 }).withMessage("Student's address City can't be more than 50 characters!"),
+    // check("address.state").optional().not().isEmpty().withMessage("Student's address state can't be empty!").isLength({ max: 50 }).withMessage("Student's address state can't be more than 50 characters!"),
+    // check("address.pin").optional().isNumeric().isLength({ min: 6, max: 6 }).withMessage("Student's address pincode is invalid!"),
 ]
 
 // /* Update borrower profile related validation */
