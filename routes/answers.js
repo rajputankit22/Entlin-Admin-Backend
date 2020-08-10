@@ -5,13 +5,10 @@ const auth = require("../middleware/auth");
 const validator = require("../middleware/validator");
 
 /* Answer Related Routes */
-// router.post("/postAnswer", validator.postAnswerValidator, auth.loginAuth, utility.answers.postAnswer); // Api to post new answer.
-// router.post("/modifyAnswer", validator.modifyAnswerValidator, auth.loginAuth, utility.answers.modifyAnswer); // Api to update own answer.
-// router.get("/deleteAnswer/:answerId", auth.loginAuth, utility.answers.deleteAnswer); // Api to delete own question.
-// router.get("/upVoteAnswer/:answerId", auth.loginAuth, utility.answers.upVoteAnswer); // Api to upVote a answer.
-// router.get("/downVoteAnswer/:answerId", auth.loginAuth, utility.answers.downVoteAnswer); // Api to downVote a answer.
-// router.get("/fetchAnswer/:answerId", auth.loginAuth, utility.answers.fetchAnswer); // Api to downVote a answer.
-// router.get("/fetchOwnAnswers", auth.loginAuth, utility.answers.fetchOwnAnswers); // Api to downVote a answer.
+router.get("/deleteAnswer/:answerId", validator.answerIdValidator, auth.loginAuth, utility.answers.deleteAnswer); // Api to delete one answer.
+router.get("/fetchAnswer/:answerId", validator.answerIdValidator, auth.loginAuth, utility.answers.fetchAnswer); // Api to fetch a answer.
+router.get("/fetchSingleStudentAnswers/:studentId", validator.studentIdValidator, auth.loginAuth, utility.answers.fetchSingleStudentAnswers); // Api to fetch single student answers.
+router.get("/fetchAllAnswers", auth.loginAuth, utility.answers.fetchAllAnswers); // Api to fetch all answers.
 
 
 // /* Mentor's Answer Related Routes */

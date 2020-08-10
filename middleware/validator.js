@@ -301,6 +301,11 @@ module.exports.questionIdValidator = [
     check("questionId").not().isEmpty().withMessage("Question Id shouldn't Empty!").isMongoId().withMessage("Question Id is inavlid!"),
 ]
 
+/* Answer Id validation */
+module.exports.answerIdValidator = [
+    check("answerId").not().isEmpty().withMessage("Answer Id shouldn't Empty!").isMongoId().withMessage("Answer Id is inavlid!"),
+]
+
 /* Student Id validation */
 module.exports.studentIdValidator = [
     check("studentId").not().isEmpty().withMessage("Student Id shouldn't Empty!").isMongoId().withMessage("Student Id is inavlid!"),
