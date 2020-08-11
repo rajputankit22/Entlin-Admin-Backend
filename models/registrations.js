@@ -12,7 +12,7 @@ const registrationSchema = new Schema({
     trim: true,
     type: Schema.Types.ObjectId,
     ref: "Events",
-    required: [true, "Student ID is required"]
+    required: [true, "Event ID is required"]
   },
 },
   {
