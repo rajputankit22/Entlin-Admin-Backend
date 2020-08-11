@@ -108,8 +108,8 @@ module.exports.deleteAnswer = async (req, res, next) => {
 /* Fetch single Answer through answerId */
 module.exports.fetchAnswer = async (req, res, next) => {
   try {
-    const answer = await Answers.findById(req.params.answerId).populate({ path: 'studentId', select: 'studentName' });
-    const answers = await Answers.find({ questionId: answer.questionId }, { createdAt: 0, updatedAt: 0 }).populate({ path: 'studentId', select: 'studentName' });
+    const answer = await Answers.findById(req.params.answerId).populate({ path: 'studentId', select: 'studentName' }).populate({ path: 'mentorId', select: 'mentorName' });
+    const answers = await Answers.find({ questionId: answer.questionId }, { createdAt: 0, updatedAt: 0 }).populate({ path: 'studentId', select: 'studentName' }).populate({ path: 'mentorId', select: 'mentorName' });
     res.status(200).json({
       success: true,
       answer: answer,
@@ -158,21 +158,21 @@ module.exports.fetchSingleStudentAnswers = async (req, res, next) => {
   }
 };
 
-// /* Fetch All mentor's Answers */
-// module.exports.fetchMentorOwnAnswers = async (req, res, next) => {
-//   try {
-//     const answers = await Answers.find({ mentorId: req.mentor._id }, { createdAt: 0, updatedAt: 0 });
-//     res.status(200).json({
-//       success: true,
-//       answers: answers
-//     });
-//   } catch (err) {
-//     console.log(err);
-//     res.status(501).send({
-//       success: false,
-//       error: "Internal Server Error!"
-//     });
-//   }
-// };
+/* Fetch Single mentor's Answers */
+module.exports.fetchSingleMentorAnswers = async (req, res, next) => {
+  try {
+    const answers = await Answers.find({ mentorId: req.params.mentorId }, { createdAt: 0, updatedAt: 0 });
+    res.status(200).json({
+      success: true,
+      answers: answers
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(501).send({
+      success: false,
+      error: "Internal Server Error!"
+    });
+  }
+};
 
 

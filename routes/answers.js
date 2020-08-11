@@ -11,11 +11,8 @@ router.get("/fetchSingleStudentAnswers/:studentId", validator.studentIdValidator
 router.get("/fetchAllAnswers", auth.loginAuth, utility.answers.fetchAllAnswers); // Api to fetch all answers.
 
 
-// /* Mentor's Answer Related Routes */
-// router.post("/postMentorAnswer", validator.postAnswerValidator, auth.loginMentorAuth, utility.answers.postMentorAnswer); // Api to post new answer.
-// router.post("/modifyMentorAnswer", validator.modifyAnswerValidator, auth.loginMentorAuth, utility.answers.modifyMentorAnswer); // Api to update own answer.
-// router.get("/deleteMentorAnswer/:answerId", auth.loginMentorAuth, utility.answers.deleteMentorAnswer); // Api to delete own question.
-// router.get("/fetchMentorOwnAnswers", auth.loginMentorAuth, utility.answers.fetchMentorOwnAnswers); // Api to downVote a answer.
+/* Mentor's Answer Related Routes */
+router.get("/fetchSingleMentorAnswers/:mentorId", validator.mentorIdValidator, auth.loginAuth, utility.answers.fetchSingleMentorAnswers); // Api to fetch single mentor's answer.
 
 
 
