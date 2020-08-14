@@ -16,7 +16,7 @@ const answerSchema = new Schema({
   mentorId: {
     trim: true,
     type: Schema.Types.ObjectId,
-    ref: "Students",
+    ref: "Mentors",
   },
   votes: {
     trim: true,

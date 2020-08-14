@@ -6,6 +6,7 @@ const {
 } = require("express-validator");
 const config = require("../../../config");
 const { findById } = require("../../../models/events");
+const Registrations = require("../../../models/registrations");
 
 /* Post new Event */
 module.exports.postEvent = async (req, res, next) => {
@@ -93,9 +94,11 @@ module.exports.deleteEvent = async (req, res, next) => {
 module.exports.fetchEvent = async (req, res, next) => {
   try {
     const event = await Events.findById(req.params.eventId, { createdAt: 0, updatedAt: 0 });
+    const registrations = await Registrations.find({ eventId: req.params.eventId }, { createdAt: 0, updatedAt: 0 }).populate({ path: 'studentId', select: 'studentName email mobile' });;
     res.status(200).json({
       success: true,
-      event: event
+      event: event,
+      registrations: registrations
     });
   } catch (err) {
     console.log(err);

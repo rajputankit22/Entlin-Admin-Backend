@@ -8,8 +8,8 @@ const videoSchema = new Schema({
     type: String,
     required: [true, "Title is required"],
     validate(value) {
-      if (value.length < 10 || value.length > 100) {
-        throw new Error("Title at least 10 and at most 100 characters!");
+      if (value.length < 2 || value.length > 100) {
+        throw new Error("Title at least 2 and at most 100 characters!");
       }
     }
   },
@@ -18,8 +18,8 @@ const videoSchema = new Schema({
     type: String,
     required: [true, "Description is required"],
     validate(value) {
-      if (value.length < 10 || value.length > 100) {
-        throw new Error("Description at least 10 and at most 100 characters!");
+      if (value.length < 2 || value.length > 2000) {
+        throw new Error("Description at least 2 and at most 2000 characters!");
       }
     }
   },
@@ -47,7 +47,7 @@ const courseSchema = new Schema({
     type: String,
     required: [true, "Title is required"],
     validate(value) {
-      if (value.length < 10 || value.length > 100) {
+      if (value.length < 2 || value.length > 100) {
         throw new Error("Title at least 10 and at most 100 characters!");
       }
     }
@@ -57,7 +57,7 @@ const courseSchema = new Schema({
     type: String,
     required: [true, "Description is required"],
     validate(value) {
-      if (value.length < 10 || value.length > 100) {
+      if (value.length < 2 || value.length > 2000) {
         throw new Error("Description at least 10 and at most 100 characters!");
       }
     }
@@ -77,8 +77,8 @@ const courseSchema = new Schema({
     type: String,
     required: [true, "Creator detailsis required"],
     validate(value) {
-      if (value.length < 2 || value.length > 100) {
-        throw new Error("Creator Name at least 2 and at most 100 characters!");
+      if (value.length < 2 || value.length > 2000) {
+        throw new Error("Creator Name at least 2 and at most 2000 characters!");
       }
     }
   },

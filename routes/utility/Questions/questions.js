@@ -5,13 +5,14 @@ const {
   validationResult
 } = require("express-validator");
 const config = require("../../../config")
-const { saveLoanHistory, getDayViseInterestAmount, roundOf } = require("../Commons/functions")
+const { saveLoanHistory, getDayViseInterestAmount, roundOf } = require("../Commons/functions");
+const Answers = require("../../../models/answers");
 
 
 /* Delete question */
 module.exports.deleteQuestion = async (req, res, next) => {
   try {
-    const removedQuestion = await Questions.deleteOne({ _id: req.params.questionId, studentId: req.student._id })
+    const removedQuestion = await Questions.deleteOne({ _id: req.params.questionId })
     res.status(200).send({
       success: true,
       message: "Question has been successfully deleted!"
@@ -28,10 +29,12 @@ module.exports.deleteQuestion = async (req, res, next) => {
 /* Fetch single Question */
 module.exports.fetchQuestion = async (req, res, next) => {
   try {
-    const question = await Questions.findById(req.params.questionId, { createdAt: 0, updatedAt: 0 });
+    const question = await Questions.findById(req.params.questionId).populate({ path: 'studentId', select: 'studentName' });
+    const answers = await Answers.find({ questionId: req.params.questionId }).populate({ path: 'studentId', select: 'studentName' });
     res.status(200).json({
       success: true,
-      question: question
+      question: question,
+      answers: answers
     });
   } catch (err) {
     console.log(err);

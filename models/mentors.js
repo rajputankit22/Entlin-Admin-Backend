@@ -103,7 +103,6 @@ const mentorSchema = new Schema(
         profilePicName: {
             trim: true,
             type: String,
-            unique: [true, "Profile pic name already taken"],
         },
         dob: {
             trim: true,
@@ -134,8 +133,8 @@ const mentorSchema = new Schema(
             trim: true,
             type: String,
             validate(value) {
-                if (value.length < 50 || value.length > 500) {
-                    throw new Error("AboutMe should be atleast 50 and at most 500 characters!");
+                if (value.length < 10 || value.length > 2000) {
+                    throw new Error("AboutMe should be atleast 10 and at most 2000 characters!");
                 }
             }
         },

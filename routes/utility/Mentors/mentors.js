@@ -29,8 +29,8 @@ module.exports.addMentor = async (req, res, next) => {
     });
     const savedMentor = await mentor.save();
     // const token = await savedMentor.generateAuthToken();
-    const newRefreshToken = await savedMentor.generateRefreshToken();
-    const updatedMentor = await Mentors.findByIdAndUpdate(savedMentor._id, { refreshToken: newRefreshToken }, { new: true })
+    // const newRefreshToken = await savedMentor.generateRefreshToken();
+    // const updatedMentor = await Mentors.findByIdAndUpdate(savedMentor._id, { refreshToken: newRefreshToken }, { new: true })
     res.status(200).send({
       success: true,
       message: "Mentor added Successfully!",
@@ -73,7 +73,7 @@ module.exports.updateProfile = async (req, res, next) => {
     res.status(200).send({
       success: true,
       message: "Mentor Updated Successfully!",
-      admin: savedMentor.getPublicProfileMentor(),
+      mentor: savedMentor.getPublicProfileMentor(),
     });
   } catch (err) {
     console.log(err);
@@ -126,7 +126,7 @@ module.exports.removeMentor = async (req, res, next) => {
 /* Fetch all mentors' list */
 module.exports.fetchAllMentors = async (req, res, next) => {
   try {
-    const mentors = await Mentors.find({}, { password: 0, ACL: 0, mobile: 0, createdAt: 0, updatedAt: 0, refreshToken: 0 });
+    const mentors = await Mentors.find({}, { password: 0, ACL: 0, createdAt: 0, updatedAt: 0, refreshToken: 0 });
     res.status(200).json({
       success: true,
       mentors: mentors

@@ -28,7 +28,7 @@ module.exports.postCourse = async (req, res, next) => {
         const savedCourses = await course.save()
         res.status(200).json({
             success: true,
-            video: savedCourses
+            course: savedCourses
         });
     } catch (err) {
         console.log(err);
