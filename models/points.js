@@ -8,7 +8,7 @@ const pointSchema = new Schema({
     ref: "Students",
     required: [true, "Student ID is required"]
   },
-  poits: {
+  points: {
     trim: true,
     type: Number,
     default: 0,
