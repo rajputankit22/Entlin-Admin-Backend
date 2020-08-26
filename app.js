@@ -36,6 +36,10 @@ mongoose.connect("mongodb://localhost:27017/entlin", {
   useNewUrlParser: true,
   useCreateIndex: true
 });
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
+mongoose.set('useUnifiedTopology', true);
 mongoose.connection.on("error", err => {
   console.log(chalk.red(err));
 });
