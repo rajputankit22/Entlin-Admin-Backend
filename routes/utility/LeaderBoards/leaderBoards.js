@@ -34,8 +34,8 @@ module.exports.getTopStudents = async (req, res, next) => {
         "_id": 1,
         "total": 1,
         "studentName": { "$arrayElemAt": ["$student.studentName", 0] },
-        "studentEmail": { "$arrayElemAt": ["$student.email", 0] },
-        "studentMobile": { "$arrayElemAt": ["$student.mobile", 0] },
+        "email": { "$arrayElemAt": ["$student.email", 0] },
+        "mobile": { "$arrayElemAt": ["$student.mobile", 0] },
       }
     }
   ];

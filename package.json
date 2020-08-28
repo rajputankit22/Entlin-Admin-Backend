@@ -1,5 +1,5 @@
 {
-  "name": "Entlin-Admin-Backend",
+  "name": "entlin-admin-backend",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -31,5 +31,9 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
+  },
+  "author": {
+    "name": "Ankit Kumar Rajpoot",
+    "email": "rajputankit22@gmail.com"
   }
 }
