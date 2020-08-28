@@ -27,6 +27,7 @@ module.exports.postVideoValidator = [
     check("createdBy").not().isEmpty().withMessage("Name is required!").isLength({ min: 2, max: 100 }).withMessage("Creator Name should be at least 2 and at most 100 characters!"),
     check("createrDetails").not().isEmpty().withMessage("Creater Details is required!").isLength({ min: 2, max: 2000 }).withMessage("Creater Details should be at least 2 and at most 2000 characters!"),
     check("prefix").not().isEmpty().withMessage("prefix is required!").isLength({ min: 1, max: 100 }).withMessage("prefix should be at least 1 and at most 100 characters!"),
+    check("tags").optional().isArray().withMessage("Tag should be in array formate!"),
 ]
 
 /* Update Video Validator */

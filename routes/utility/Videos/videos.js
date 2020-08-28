@@ -11,6 +11,7 @@ module.exports.postVideo = async (req, res, next) => {
     try {
         const video = new Videos({
             title: req.body.title,
+            tags: req.body.tags,
             description: req.body.description,
             createdBy: req.body.createdBy,
             createrDetails: req.body.createrDetails,

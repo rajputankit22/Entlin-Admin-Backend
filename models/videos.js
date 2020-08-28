@@ -54,6 +54,12 @@ const videoSchema = new Schema({
     default: false,
     required: [true, 'Public is required!']
   },
+  tags: [
+    {
+      trim: true,
+      type: String
+    }
+  ],
   videoFileName: {
     trim: true,
     type: String,
