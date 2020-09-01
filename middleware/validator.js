@@ -70,7 +70,7 @@ module.exports.addMentorValidator = [
     check("mobile").isMobilePhone().isLength({ min: 10, max: 10 }).withMessage("Mobile is invalid!"),
     check('dob').isBefore().withMessage("DOB cannot be empty"),
     check("totalExperience").isNumeric().withMessage("Total Experience is invalid!"),
-    check("higerEducation").isIn(["MCA", "MBA", "BSC"]).withMessage("Higer Education is invalid!"),
+    check("higerEducation").isIn(["MCA", "MSC", "BSC"]).withMessage("Higer Education is invalid!"),
     check("skills").isArray().withMessage("Skills is invalid!"),
     check("currentlyWorking").isLength({ min: 1, max: 50 }).withMessage("Company Name shoudn't greater than 50 characters!"),
     check("aboutMe").isLength({ min: 1, max: 500 }).withMessage("AboutMe shoudn't greater than 50 characters!"),

@@ -21,7 +21,7 @@ module.exports.postCourse = async (req, res, next) => {
             numberOfVideos: req.body.numberOfVideos,
         })
         req.body.videosList.forEach(element => {
-            element.fileName = req.body.prefix + "_" + crypto.randomBytes(16).toString("hex") + '.mp4';
+            element.fileName = req.body.prefix + "_" + crypto.randomBytes(32).toString("hex") + '.mp4';
             videosList.push(element)
         });
         course.videosList = videosList;

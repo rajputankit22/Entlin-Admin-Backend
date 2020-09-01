@@ -8,6 +8,7 @@ const crypto = require("crypto");
 
 /* Post new video */
 module.exports.postVideo = async (req, res, next) => {
+    const randomByte = crypto.randomBytes(32).toString("hex")
     try {
         const video = new Videos({
             title: req.body.title,
@@ -15,7 +16,7 @@ module.exports.postVideo = async (req, res, next) => {
             description: req.body.description,
             createdBy: req.body.createdBy,
             createrDetails: req.body.createrDetails,
-            videoFileName: req.body.prefix + "_" + crypto.randomBytes(16).toString("hex") + '.mp4',
+            videoFileName: req.body.prefix + "_" + randomByte + '.mp4',
         })
         const savedVideos = await video.save()
         res.status(200).json({
