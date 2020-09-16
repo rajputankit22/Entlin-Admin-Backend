@@ -1,5 +1,6 @@
 const moment = require("moment");
 const Mentors = require("../../../models/mentors");
+const Students = require("../../../models/students");
 const {
   check,
   validationResult
@@ -14,6 +15,10 @@ module.exports.addMentor = async (req, res, next) => {
     });
   }
   try {
+    const findStudent = await Students.findOne({ email: req.body.email });
+    if (findStudent) {
+      throw new Error("Email is registered as a student!");
+    }
     const mentor = new Mentors({
       mentorName: req.body.mentorName,
       email: req.body.email,
@@ -44,7 +49,7 @@ module.exports.addMentor = async (req, res, next) => {
         }
       } else if (err.name == 'MongoError' && err.code == 11000) {
         res.status(422).send({ success: false, error: "Mentor already exist!" });
-      } else { res.status(500).json({ success: false, error: err }); }
+      } else { res.status(500).json({ success: false, error: err.message || err }); }
     }
   }
 };
