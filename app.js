@@ -28,6 +28,7 @@ const eventRouter = require("./routes/events");
 const pointRouter = require("./routes/points");
 const registrationRouter = require("./routes/registrations");
 const leaderBoardRouter = require("./routes/leaderBoards");
+const subscriptionRouter = require("./routes/subscriptions");
 
 
 const app = express();
@@ -93,6 +94,7 @@ app.use("/coursesRatings", courseRatingRouter);
 app.use("/registrations", registrationRouter);
 app.use("/points", pointRouter);
 app.use("/leaderBoards", leaderBoardRouter);
+app.use("/subscriptions", subscriptionRouter);
 
 
 // catch 404 and forward to error handler

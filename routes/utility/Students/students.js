@@ -45,7 +45,6 @@ module.exports.updateProfile = async (req, res, next) => {
 module.exports.fetchStudent = async (req, res, next) => {
   try {
     const student = await Students.findById(req.params.studentId, { password: 0, createdAt: 0, updatedAt: 0 });
-    console.log(student)
     if (student) {
       res.status(200).json({
         success: true,
@@ -69,9 +68,7 @@ module.exports.fetchStudent = async (req, res, next) => {
 /* Remove any student */
 module.exports.removeStudent = async (req, res, next) => {
   try {
-    console.log(req.params.studentId)
     const deletedStudent = await Students.deleteOne({ _id: req.params.studentId });
-    console.log(deletedStudent)
     res.status(200).json({
       success: true,
       message: "Student Removed Successfully!",

@@ -336,3 +336,14 @@ module.exports.ratingIdValidator = [
 module.exports.employeeIdValidator = [
     check("employeeId").not().isEmpty().withMessage("Employee Id shouldn't Empty!").isMongoId().withMessage("Employee Id is inavlid!"),
 ]
+
+/* Subscription Id validation */
+module.exports.subscriptionIdValidator = [
+    check("subscriptionId").not().isEmpty().withMessage("Subscription Id shouldn't Empty!").isMongoId().withMessage("Subscription Id is inavlid!"),
+]
+
+/* Create Subscription validation */
+module.exports.createSubscriptionValidator = [
+    check("studentId").not().isEmpty().withMessage("Student Id shouldn't Empty!").isMongoId().withMessage("Student Id is inavlid!"),
+    check("subscriptionType").not().isEmpty().withMessage("Subscription Type shouldn't Empty!").isIn(['monthly', 'quarterly', 'yearly']).withMessage("Subscription Type is inavlid!"),
+]
