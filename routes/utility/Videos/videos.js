@@ -21,7 +21,8 @@ module.exports.postVideo = async (req, res, next) => {
         const savedVideos = await video.save()
         res.status(200).json({
             success: true,
-            video: savedVideos
+            video: savedVideos,
+            message: "Video Successfully Added!"
         });
     } catch (err) {
         console.log(err);
@@ -48,7 +49,8 @@ module.exports.updateVideo = async (req, res, next) => {
         const savedVideos = await video.save()
         res.status(200).json({
             success: true,
-            video: savedVideos
+            video: savedVideos,
+            message: "Video Successfully Updated!"
         });
     } catch (err) {
         console.log(err);
@@ -70,7 +72,8 @@ module.exports.uploadVideo = async (req, res, next) => {
         const uploadedVideo = await Videos.findOneAndUpdate({ _id: req.params.videoId }, { $set: { uploaded: true } }, { new: true, fields: { createdAt: 0, updatedAt: 0 } });
         res.status(200).json({
             success: true,
-            video: uploadedVideo
+            video: uploadedVideo,
+            message: "Video Successfully Uploaded!"
         });
     } catch (err) {
         console.log(err);
@@ -87,7 +90,8 @@ module.exports.unUploadVideo = async (req, res, next) => {
         const unUploadedVideo = await Videos.findOneAndUpdate({ _id: req.params.videoId }, { $set: { uploaded: false } }, { new: true, fields: { createdAt: 0, updatedAt: 0 } });
         res.status(200).json({
             success: true,
-            video: unUploadedVideo
+            video: unUploadedVideo,
+            message: "Video Successfully UnUploaded!"
         });
     } catch (err) {
         console.log(err);
@@ -104,7 +108,8 @@ module.exports.publishVideo = async (req, res, next) => {
         const publishedVideo = await Videos.findOneAndUpdate({ _id: req.params.videoId }, { $set: { publish: true } }, { new: true, fields: { createdAt: 0, updatedAt: 0 } });
         res.status(200).json({
             success: true,
-            video: publishedVideo
+            video: publishedVideo,
+            message: "Video Successfully Published!"
         });
     } catch (err) {
         console.log(err);
@@ -121,7 +126,8 @@ module.exports.unPublishVideo = async (req, res, next) => {
         const unPublishedVideo = await Videos.findOneAndUpdate({ _id: req.params.videoId }, { $set: { publish: false } }, { new: true, fields: { createdAt: 0, updatedAt: 0 } });
         res.status(200).json({
             success: true,
-            video: unPublishedVideo
+            video: unPublishedVideo,
+            message: "Video Successfully UnPublished!"
         });
     } catch (err) {
         console.log(err);
@@ -169,11 +175,11 @@ module.exports.fetchVideo = async (req, res, next) => {
 /* Delete question */
 module.exports.deleteVideo = async (req, res, next) => {
     try {
-        const removedVideo = await Videos.deleteOne({ _id: req.params.videoId })
-        console.log(removedVideo)
+        const removedVideo = await Videos.findByIdAndDelete(req.params.videoId)
         res.status(200).send({
             success: true,
-            message: "Video has been successfully deleted!"
+            videoId: removedVideo._id,
+            message: "Video successfully deleted!"
         });
     } catch (error) {
         console.log(error);
