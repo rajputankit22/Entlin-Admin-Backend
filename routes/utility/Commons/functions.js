@@ -5,6 +5,7 @@ const crypto = require("crypto");
 const regxPdf = new RegExp("^.*\.(pdf)$", 'i');
 // var regx = new RegExp("^.*\.(jpg|jpeg|pdf|png|csv|xls|xlsx)$", 'i');
 var regx = new RegExp("^.*\.(jpg|jpeg|pdf|png)$", 'i');
+var cfsign = require('aws-cloudfront-sign');
 
 const s3 = new AWS.S3({
     endpoint: 's3-ap-south-1.amazonaws.com',
@@ -99,7 +100,6 @@ module.exports.getSignedUrlForFile = async (fileName, originalFileName) => {
         Bucket: config.BUCKET_NAME,
         Key: fileName,
         Expires: 60 * 5,
-        ResponseContentDisposition: 'attachment; filename ="' + originalFileName + '"'
     };
     try {
         return await new Promise((resolve, reject) => {
@@ -121,7 +121,6 @@ module.exports.removeFile = async (fileName) => {
         Bucket: config.BUCKET_NAME,
         Key: fileName
     };
-    console.log(params)
     try {
         return await s3.deleteObject(params).promise()
     } catch (error) {
@@ -204,8 +203,24 @@ module.exports.balanceSheet = async (req, res, next) => {
     }
 }
 
-
-
+/* Generate pre singed url for file */
+module.exports.getPreSignedUrl = async (fileName) => {
+    console.log("Fole Name")
+    const PUBLIC_KEY = config.PUBLIC_KEY.replace(/\\n/g, '\n');
+    const PRIVATE_KEY = config.PRIVATE_KEY.replace(/\\n/g, '\n');
+    const params = {
+        keypairId: config.ACCESS_KEY_ID,
+        privateKeyString: PRIVATE_KEY,
+        Expires: 60 * 5,
+        ResponseContentDisposition: 'attachment; filename ="' + 'test.pdf' + '"'
+    };
+    try {
+        return await cfsign.getSignedUrl('https://dps7heucx1404.cloudfront.net/' + fileName, params);
+    } catch (err) {
+        console.log(err)
+        throw new Error(err);
+    }
+}
 
 
 

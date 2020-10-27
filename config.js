@@ -7,9 +7,9 @@ const config = {
     BUCKET_NAME: process.env.BUCKET_NAME,
     IAM_USER_KEY: process.env.IAM_USER_KEY,
     IAM_USER_SECRET: process.env.IAM_USER_SECRET,
-    TOTAL_INTEREST: 10,
-    LENDER_INTEREST: 2,
-    CREDIT_LINE_DAYS: 60
+    PUBLIC_KEY: process.env.PUBLIC_KEY,
+    PRIVATE_KEY: process.env.PRIVATE_KEY,
+    ACCESS_KEY_ID: process.env.ACCESS_KEY_ID
 };
 
 module.exports = config;

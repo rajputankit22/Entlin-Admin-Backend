@@ -6,6 +6,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "aws-cloudfront-sign": "^2.2.0",
     "aws-sdk": "^2.596.0",
     "axios": "^0.19.2",
     "bcryptjs": "^2.4.3",
