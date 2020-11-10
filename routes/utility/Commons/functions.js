@@ -6,6 +6,8 @@ const regxPdf = new RegExp("^.*\.(pdf)$", 'i');
 // var regx = new RegExp("^.*\.(jpg|jpeg|pdf|png|csv|xls|xlsx)$", 'i');
 var regx = new RegExp("^.*\.(jpg|jpeg|pdf|png)$", 'i');
 var cfsign = require('aws-cloudfront-sign');
+const cryptoRandomString = require("crypto-random-string");
+
 
 const s3 = new AWS.S3({
     endpoint: 's3-ap-south-1.amazonaws.com',
@@ -205,14 +207,12 @@ module.exports.balanceSheet = async (req, res, next) => {
 
 /* Generate pre singed url for file */
 module.exports.getPreSignedUrl = async (fileName) => {
-    console.log("Fole Name")
     const PUBLIC_KEY = config.PUBLIC_KEY.replace(/\\n/g, '\n');
     const PRIVATE_KEY = config.PRIVATE_KEY.replace(/\\n/g, '\n');
     const params = {
         keypairId: config.ACCESS_KEY_ID,
         privateKeyString: PRIVATE_KEY,
         Expires: 60 * 5,
-        ResponseContentDisposition: 'attachment; filename ="' + 'test.pdf' + '"'
     };
     try {
         return await cfsign.getSignedUrl('https://dps7heucx1404.cloudfront.net/' + fileName, params);
@@ -222,6 +222,35 @@ module.exports.getPreSignedUrl = async (fileName) => {
     }
 }
 
+// Upload file in S3 Bucket
+module.exports.uploadFile = async (req, res, next) => {
+    var file = req.body.file;
+    const randomNumber = Math.floor(Math.random() * 150 + 100);
+    const randomString = cryptoRandomString({
+        length: randomNumber,
+        type: 'url-safe'
+    });
+    let fileName = randomString + '.' + req.body.originalFileName.split(".").pop();
+    let buf = Buffer.from(file.replace(/^data:application\/[a-z]+;base64,/, ""), 'base64')
+    let params = {
+        Bucket: config.BUCKET_NAME,
+        Key: fileName,
+        ContentEncoding: 'base64',
+        ContentDisposition: 'inline',
+        Body: buf,
+    };
+    try {
+        const data = await s3.putObject(params).promise();
+        req.upload = fileName;
+        next()
+    } catch (err) {
+        console.log(err);
+        unlinkFile(req.upload);
+        return res.status(500).send({
+            error: err
+        });
+    }
+}
 
 
 

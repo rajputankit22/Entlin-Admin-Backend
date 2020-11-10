@@ -14,15 +14,15 @@ const Registrations = require("../../../models/registrations");
 /* Fetch all home page's details */
 module.exports.fetchHomeDetails = async (req, res, next) => {
     try {
-        const studentsCount = await Students.count()
-        const mentorsCount = await Mentors.count()
-        const coursesCount = await Courses.count()
-        const videosCount = await Videos.count()
-        const eventsCount = await Events.count()
-        const questionsCount = await Questions.count()
-        const answersCount = await Answers.count()
-        const employeesCount = await Employees.count()
-        const registrationsCount = await Registrations.count()
+        const studentsCount = await Students.countDocuments()
+        const mentorsCount = await Mentors.countDocuments()
+        const coursesCount = await Courses.countDocuments()
+        const videosCount = await Videos.countDocuments()
+        const eventsCount = await Events.countDocuments()
+        const questionsCount = await Questions.countDocuments()
+        const answersCount = await Answers.countDocuments()
+        const employeesCount = await Employees.countDocuments()
+        const registrationsCount = await Registrations.countDocuments()
 
         res.status(200).send({
             success: true,
