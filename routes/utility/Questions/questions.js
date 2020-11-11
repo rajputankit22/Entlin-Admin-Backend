@@ -12,10 +12,11 @@ const Answers = require("../../../models/answers");
 /* Delete question */
 module.exports.deleteQuestion = async (req, res, next) => {
   try {
-    const removedQuestion = await Questions.deleteOne({ _id: req.params.questionId })
+    const removedQuestion = await Questions.findByIdAndDelete(req.params.questionId)
     res.status(200).send({
       success: true,
-      message: "Question has been successfully deleted!"
+      questionId: removedQuestion._id,
+      message: "Question Successfully Deleted!"
     });
   } catch (error) {
     console.log(error);
@@ -85,7 +86,8 @@ module.exports.closeQuestion = async (req, res, next) => {
     const closedQuestion = await Questions.findOneAndUpdate({ _id: req.params.questionId }, { $set: { status: 'close' } }, { new: true, fields: { createdAt: 0, updatedAt: 0 } });
     res.status(200).json({
       success: true,
-      question: closedQuestion
+      question: closedQuestion,
+      message: "Question Successfully Closed!"
     });
   } catch (err) {
     console.log(err);

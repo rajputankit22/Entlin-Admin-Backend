@@ -21,14 +21,15 @@ module.exports.postCourse = async (req, res, next) => {
             numberOfVideos: req.body.numberOfVideos,
         })
         req.body.videosList.forEach(element => {
-            element.fileName = req.body.prefix + "_" + crypto.randomBytes(16).toString("hex") + '.mp4';
+            element.fileName = req.body.prefix + "_" + crypto.randomBytes(32).toString("hex") + '.mp4';
             videosList.push(element)
         });
         course.videosList = videosList;
         const savedCourses = await course.save()
         res.status(200).json({
             success: true,
-            course: savedCourses
+            course: savedCourses,
+            message: "Course Successfully Added!"
         });
     } catch (err) {
         console.log(err);
@@ -50,13 +51,15 @@ module.exports.uploadCourse = async (req, res, next) => {
         const uploadedCourse = await Courses.findOneAndUpdate({ _id: req.params.courseId }, { $set: { uploaded: true } }, { new: true, fields: { createdAt: 0, updatedAt: 0 } });
         res.status(200).json({
             success: true,
-            course: uploadedCourse
+            course: uploadedCourse,
+            message: "Course Successfully Uploaded!"
         });
     } catch (err) {
         console.log(err);
         res.status(501).send({
             success: false,
-            error: "Internal Server Error!"
+            error: "Internal Server Error!",
+            message: "Course Successfully Uploaded!"
         });
     }
 };
@@ -67,7 +70,8 @@ module.exports.unUploadCourse = async (req, res, next) => {
         const unUploadedCourse = await Courses.findOneAndUpdate({ _id: req.params.courseId }, { $set: { uploaded: false } }, { new: true, fields: { createdAt: 0, updatedAt: 0 } });
         res.status(200).json({
             success: true,
-            course: unUploadedCourse
+            course: unUploadedCourse,
+            message: "Course Successfully Unuploaded!"
         });
     } catch (err) {
         console.log(err);
@@ -84,7 +88,8 @@ module.exports.publishCourse = async (req, res, next) => {
         const publishedCourse = await Courses.findOneAndUpdate({ _id: req.params.courseId }, { $set: { publish: true } }, { new: true, fields: { createdAt: 0, updatedAt: 0 } });
         res.status(200).json({
             success: true,
-            course: publishedCourse
+            course: publishedCourse,
+            message: "Course Successfully Published!"
         });
     } catch (err) {
         console.log(err);
@@ -99,10 +104,10 @@ module.exports.publishCourse = async (req, res, next) => {
 module.exports.unPublishCourse = async (req, res, next) => {
     try {
         const unPublishedCourse = await Courses.findOneAndUpdate({ _id: req.params.courseId }, { $set: { publish: false } }, { new: true, fields: { createdAt: 0, updatedAt: 0 } });
-        console.log(unPublishedCourse)
         res.status(200).json({
             success: true,
-            course: unPublishedCourse
+            course: unPublishedCourse,
+            message: "Course Successfully UnPublished!"
         });
     } catch (err) {
         console.log(err);
@@ -150,11 +155,12 @@ module.exports.fetchCourse = async (req, res, next) => {
 /* Delete Course */
 module.exports.deleteCourse = async (req, res, next) => {
     try {
-        const removedCourse = await Courses.deleteOne({ _id: req.params.courseId })
+        const removedCourse = await Courses.findByIdAndDelete(req.params.courseId)
         console.log(removedCourse)
         res.status(200).send({
             success: true,
-            message: "Course has been successfully deleted!"
+            courseId: removedCourse._id,
+            message: "Course Successfully deleted!"
         });
     } catch (error) {
         console.log(error);

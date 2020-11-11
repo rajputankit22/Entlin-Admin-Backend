@@ -65,11 +65,11 @@ const {
 /* Delete answer through answerId */
 module.exports.deleteAnswer = async (req, res, next) => {
   try {
-    const removedAnswer = await Answers.deleteOne({ _id: req.params.answerId })
-    console.log(removedAnswer)
+    const removedAnswer = await Answers.findByIdAndDelete(req.params.answerId)
     res.status(200).send({
       success: true,
-      message: "Answer has been successfully deleted!"
+      answerId: removedAnswer._id,
+      message: "Answer Successfully deleted!"
     });
   } catch (error) {
     console.log(error);

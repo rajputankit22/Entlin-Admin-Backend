@@ -12,7 +12,7 @@ dotenv.config();
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
-	res.send("SME Admin Platform!");
+	res.send("Entlin Admin Platform!");
 });
 
 /* Sign In route for admin */

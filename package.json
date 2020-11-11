@@ -1,11 +1,12 @@
 {
-  "name": "Entlin-Admin-Backend",
+  "name": "entlin-admin-backend",
   "version": "0.0.0",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "aws-cloudfront-sign": "^2.2.0",
     "aws-sdk": "^2.596.0",
     "axios": "^0.19.2",
     "bcryptjs": "^2.4.3",
@@ -31,5 +32,9 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
+  },
+  "author": {
+    "name": "Ankit Kumar Rajpoot",
+    "email": "rajputankit22@gmail.com"
   }
 }

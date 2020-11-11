@@ -25,7 +25,8 @@ module.exports.postEvent = async (req, res, next) => {
     const savedEvent = await event.save()
     res.status(200).json({
       success: true,
-      event: savedEvent
+      event: savedEvent,
+      message: "Event Successfully Added!"
     });
   } catch (err) {
     console.log(err);
@@ -57,7 +58,8 @@ module.exports.updateEvent = async (req, res, next) => {
     const savedEvent = await event.save()
     res.status(200).json({
       success: true,
-      event: savedEvent
+      event: savedEvent,
+      message: "Event Successfully Updated!"
     });
   } catch (err) {
     console.log(err);
@@ -76,10 +78,11 @@ module.exports.updateEvent = async (req, res, next) => {
 /* Delete event */
 module.exports.deleteEvent = async (req, res, next) => {
   try {
-    const removedEvent = await Events.deleteOne({ _id: req.params.eventId })
+    const removedEvent = await Events.findByIdAndDelete(req.params.eventId)
     res.status(200).send({
       success: true,
-      message: "Event has been successfully deleted!"
+      eventId: removedEvent._id,
+      message: "Event Successfully deleted!"
     });
   } catch (error) {
     console.log(error);

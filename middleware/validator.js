@@ -27,6 +27,7 @@ module.exports.postVideoValidator = [
     check("createdBy").not().isEmpty().withMessage("Name is required!").isLength({ min: 2, max: 100 }).withMessage("Creator Name should be at least 2 and at most 100 characters!"),
     check("createrDetails").not().isEmpty().withMessage("Creater Details is required!").isLength({ min: 2, max: 2000 }).withMessage("Creater Details should be at least 2 and at most 2000 characters!"),
     check("prefix").not().isEmpty().withMessage("prefix is required!").isLength({ min: 1, max: 100 }).withMessage("prefix should be at least 1 and at most 100 characters!"),
+    check("tags").optional().isArray().withMessage("Tag should be in array formate!"),
 ]
 
 /* Update Video Validator */
@@ -69,7 +70,7 @@ module.exports.addMentorValidator = [
     check("mobile").isMobilePhone().isLength({ min: 10, max: 10 }).withMessage("Mobile is invalid!"),
     check('dob').isBefore().withMessage("DOB cannot be empty"),
     check("totalExperience").isNumeric().withMessage("Total Experience is invalid!"),
-    check("higerEducation").isIn(["MCA", "MBA", "BSC"]).withMessage("Higer Education is invalid!"),
+    check("higerEducation").isIn(["MCA", "MSC", "BSC"]).withMessage("Higer Education is invalid!"),
     check("skills").isArray().withMessage("Skills is invalid!"),
     check("currentlyWorking").isLength({ min: 1, max: 50 }).withMessage("Company Name shoudn't greater than 50 characters!"),
     check("aboutMe").isLength({ min: 1, max: 500 }).withMessage("AboutMe shoudn't greater than 50 characters!"),
@@ -334,4 +335,64 @@ module.exports.ratingIdValidator = [
 /* Employee Id validation */
 module.exports.employeeIdValidator = [
     check("employeeId").not().isEmpty().withMessage("Employee Id shouldn't Empty!").isMongoId().withMessage("Employee Id is inavlid!"),
+]
+
+/* Subscription Id validation */
+module.exports.subscriptionIdValidator = [
+    check("subscriptionId").not().isEmpty().withMessage("Subscription Id shouldn't Empty!").isMongoId().withMessage("Subscription Id is inavlid!"),
+]
+
+/* Incubation Id validation */
+module.exports.incubationIdValidator = [
+    check("incubationId").not().isEmpty().withMessage("Incubation Id shouldn't Empty!").isMongoId().withMessage("Incubation Id is inavlid!"),
+]
+
+/* Incubation related validations */
+module.exports.incubationValidator = [
+    check("startupName").not().isEmpty().withMessage("Startup Name is required").isLength({ min: 1, max: 100 }).withMessage("Startup Name shoudn't greater than 100 characters!"),
+    check("registered").not().isEmpty().withMessage("Registered is required").isBoolean().withMessage("Registered is invalid!"),
+    check("typeOfRegistration").optional().not().isEmpty().withMessage("Type Of Registration is required").isIn(['Sole Proprietor', 'LLP', 'Partnership', 'Private Limited']).withMessage("Type Of Registration is invalid!"),
+    check("yaerOfRegistration").optional().not().isEmpty().withMessage("Yaer Of Registration is required").isLength({ min: 4, max: 4 }).withMessage("Yaer Of Registration is invalid!"),
+    check("startupStage").not().isEmpty().withMessage("StartUp stage is required").isIn(['Idea', 'Product Development', 'Pre-revenue(Just Launched)', 'Revenue Stage']).withMessage("StartUp stage is invalid!"),
+    check("startWorkingOnIdea").not().isEmpty().withMessage("Start Working On Idea is required").isBefore().withMessage("Start Working On Idea shoudn't greater than yestarday!"),
+    check("currentMonthlyRevenue").not().isEmpty().withMessage("Current Monthly Revenue is required").isIn(['0', 'Under 1 lac', '1-5 Lac', 'Above 5 lac']).withMessage("Current Monthly Revenue is invalid!"),
+    check("problemYouAreSolving").not().isEmpty().withMessage("Problem you are solving is required").isLength({ min: 1, max: 60 }).withMessage("Problem you are solving shoudn't greater than 60 characters!"),
+    check("productDescription").not().isEmpty().withMessage("Product Description is required").isLength({ min: 1, max: 100 }).withMessage("Product Description shoudn't greater than 100 characters!"),
+    check("numberOfFounders").not().isEmpty().withMessage("Number Of founders is required").isIn([1, 2, 3, 4, 5]).withMessage("Number Of founders is invalid!"),
+    check("foundersDetails").not().isEmpty().withMessage("Founders Details is required").isArray().withMessage("Founders Details is invalid!"),
+    check("financialPlan.s3FileName").not().isEmpty().withMessage("S3 file is required"),
+    check("financialPlan.originalFileName").not().isEmpty().withMessage("Original file is required"),
+    check("pitchDeck.s3FileName").not().isEmpty().withMessage("S3 file is required"),
+    check("pitchDeck.originalFileName").not().isEmpty().withMessage("Original file is required"),
+    check("contactsDetails.name").not().isEmpty().withMessage("Name is required").isLength({ min: 1, max: 50 }).withMessage("Name shoudn't greater than 50 characters!"),
+    check("contactsDetails.role").not().isEmpty().withMessage("Role is required").isLength({ min: 1, max: 50 }).withMessage("Role shoudn't greater than 50 characters!"),
+    check("contactsDetails.email").isEmail().withMessage("Email is invalid!"),
+    check("contactsDetails.mobile").isMobilePhone().isLength({ min: 10, max: 10 }).withMessage("Mobile is invalid!"),
+    check("address.address").not().isEmpty().withMessage("Company's address can't be empty!").isLength({ max: 200 }).withMessage("Student's address can't be more than 200 characters!"),
+    check("address.city").not().isEmpty().withMessage("Company's address City can't be empty!").isLength({ max: 50 }).withMessage("Student's address City can't be more than 50 characters!"),
+    check("address.state").not().isEmpty().withMessage("Company's address state can't be empty!").isLength({ max: 50 }).withMessage("Student's address state can't be more than 50 characters!"),
+    check("address.pin").isNumeric().isLength({ min: 6, max: 6 }).withMessage("Company's address pincode is invalid!"),
+]
+
+/* Update Incubation related validations */
+module.exports.incubationUpdateValidator = [
+    check("typeOfRegistration").optional().not().isEmpty().withMessage("Type Of Registration is required").isIn(['Sole Proprietor', 'LLP', 'Partnership', 'Private Limited']).withMessage("Type Of Registration is invalid!"),
+    check("yaerOfRegistration").optional().not().isEmpty().withMessage("Yaer Of Registration is required").isLength({ min: 4, max: 4 }).withMessage("Yaer Of Registration is invalid!"),
+    check("startupStage").not().isEmpty().withMessage("StartUp stage is required").isIn(['Idea', 'Product Development', 'Pre-revenue(Just Launched)', 'Revenue Stage']).withMessage("StartUp stage is invalid!"),
+    check("startWorkingOnIdea").not().isEmpty().withMessage("Start Working On Idea is required").isBefore().withMessage("Start Working On Idea shoudn't greater than yestarday!"),
+    check("currentMonthlyRevenue").not().isEmpty().withMessage("Current Monthly Revenue is required").isIn(['0', 'Under 1 lac', '1-5 Lac', 'Above 5 lac']).withMessage("Current Monthly Revenue is invalid!"),
+    check("problemYouAreSolving").not().isEmpty().withMessage("Problem you are solving is required").isLength({ min: 1, max: 60 }).withMessage("Problem you are solving shoudn't greater than 60 characters!"),
+    check("productDescription").not().isEmpty().withMessage("Product Description is required").isLength({ min: 1, max: 100 }).withMessage("Product Description shoudn't greater than 100 characters!"),
+    check("numberOfFounders").not().isEmpty().withMessage("Number Of founders is required").isIn([1, 2, 3, 4, 5]).withMessage("Number Of founders is invalid!"),
+]
+
+/* Create Subscription validation */
+module.exports.createSubscriptionValidator = [
+    check("studentId").not().isEmpty().withMessage("Student Id shouldn't Empty!").isMongoId().withMessage("Student Id is inavlid!"),
+    check("subscriptionType").not().isEmpty().withMessage("Subscription Type shouldn't Empty!").isIn(['monthly', 'quarterly', 'yearly']).withMessage("Subscription Type is inavlid!"),
+]
+
+/* File Name validation */
+module.exports.fileNameValidator = [
+    check("fileName").not().isEmpty().isLength({ min: 10, max: 500 }).withMessage("File Name is invalid!"),
 ]
