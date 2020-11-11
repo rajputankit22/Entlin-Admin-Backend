@@ -43,7 +43,7 @@ module.exports.updateDocumentValidator = [
     check("title").not().isEmpty().withMessage("Title is required!").isLength({ min: 2, max: 100 }).withMessage("Title should be at least 2 and at most 100 characters!"),
     check("description").not().isEmpty().withMessage("Description is required!").isLength({ min: 2, max: 2000 }).withMessage("Description should be at least 2 and at most 2000 characters!"),
     check("originalFileName").not().isEmpty().withMessage("Original File Name is required!").isLength({ min: 1, max: 1000 }).withMessage("Original File Name should be at least 1 and at most 1000 characters!"),
-    check("file").optional().isBase64().withMessage("File is invalid!"),
+    check("file").optional().isBase64().withMessage("File is invalid empty!"),
 ]
 
 /* Update Video Validator */

@@ -42,7 +42,7 @@ module.exports.updateDocument = async (req, res, next) => {
         document.title = req.body.title;
         document.description = req.body.description;
         document.originalFileName = req.body.originalFileName;
-        document.fileName = req.upload
+        document.fileName = req.upload || document.fileName
         const savedDocument = await document.save()
         res.status(200).json({
             success: true,
