@@ -151,6 +151,7 @@ const unlinkFile = async (fileName) => {
     };
     try {
         let response = await s3.deleteObject(params).promise()
+        return response;
     } catch (error) {
         console.log(error)
     }
@@ -249,6 +250,41 @@ module.exports.uploadFile = async (req, res, next) => {
         return res.status(500).send({
             error: err
         });
+    }
+}
+
+// Update file in S3 Bucket
+module.exports.updateFile = async (req, res, next) => {
+    if (req.body.file) {
+        const deletedResponse = await unlinkFile(req.body.fileName);
+        const file = req.body.file;
+        const randomNumber = Math.floor(Math.random() * 150 + 100);
+        const randomString = cryptoRandomString({
+            length: randomNumber,
+            type: 'url-safe'
+        });
+        let fileName = randomString + '.' + req.body.originalFileName.split(".").pop();
+        let buf = Buffer.from(file.replace(/^data:application\/[a-z]+;base64,/, ""), 'base64')
+        let params = {
+            Bucket: config.BUCKET_NAME,
+            Key: fileName,
+            ContentEncoding: 'base64',
+            ContentDisposition: 'inline',
+            Body: buf,
+        };
+        try {
+            const data = await s3.putObject(params).promise();
+            req.upload = fileName;
+            next()
+        } catch (err) {
+            console.log(err);
+            unlinkFile(req.upload);
+            return res.status(500).send({
+                error: err
+            });
+        }
+    } else {
+        next()
     }
 }
 

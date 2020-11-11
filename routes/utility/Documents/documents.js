@@ -35,33 +35,33 @@ module.exports.postDocument = async (req, res, next) => {
     }
 };
 
-// /* Update video */
-// module.exports.updateVideo = async (req, res, next) => {
-//     try {
-//         const video = await Videos.findById(req.params.videoId);
-//         video.title = req.body.title;
-//         video.description = req.body.description;
-//         video.createdBy = req.body.createdBy;
-//         video.createrDetails = req.body.createrDetails;
-//         const savedVideos = await video.save()
-//         res.status(200).json({
-//             success: true,
-//             video: savedVideos,
-//             message: "Video Successfully Updated!"
-//         });
-//     } catch (err) {
-//         console.log(err);
-//         if (err) {
-//             if (err.name == 'ValidationError') {
-//                 for (field in err.errors) {
-//                     res.status(422).send({ success: false, error: err.errors[field].message });
-//                 }
-//             } else if (err.name == 'MongoError' && err.code == 11000) {
-//                 res.status(422).send({ success: false, error: "Video already exist!" });
-//             } else { res.status(500).json({ success: false, error: err }); }
-//         }
-//     }
-// };
+/* Update Document */
+module.exports.updateDocument = async (req, res, next) => {
+    try {
+        const document = await Documents.findById(req.params.documentId);
+        document.title = req.body.title;
+        document.description = req.body.description;
+        document.originalFileName = req.body.originalFileName;
+        document.fileName = req.upload
+        const savedDocument = await document.save()
+        res.status(200).json({
+            success: true,
+            document: savedDocument,
+            message: "Document Successfully Updated!"
+        });
+    } catch (err) {
+        console.log(err);
+        if (err) {
+            if (err.name == 'ValidationError') {
+                for (field in err.errors) {
+                    res.status(422).send({ success: false, error: err.errors[field].message });
+                }
+            } else if (err.name == 'MongoError' && err.code == 11000) {
+                res.status(422).send({ success: false, error: "Document already exist!" });
+            } else { res.status(500).json({ success: false, error: err }); }
+        }
+    }
+};
 
 /* Publish Document */
 module.exports.publishDocument = async (req, res, next) => {
